@@ -12,7 +12,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "ansible/playbook.yml"
     ansible.inventory_path = "./ansible/ansible_inventory"
-    ansible.verbose = true
+    ansible.verbose = 'v'
   end
 
   # Disable automatic box update checking. If you disable this, then
