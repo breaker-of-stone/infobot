@@ -6,5 +6,12 @@
     sudo: yes
     apt: name=redis-server
       state=present
-      update-cache=yes
+#      update-cache=yes
 
+  - name: tweak the redis config file
+    sudo: yes
+    lineinfile: dest=/etc/redis/redis.conf regexp='^timeout' line="timeout 300"
+
+  - name: start redis
+    sudo: yes
+    service: name=redis-server state=started
