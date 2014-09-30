@@ -14,4 +14,11 @@
 
   - name: start redis
     sudo: yes
-    service: name=redis-server state=started
+    service: name=redis-server enabled=yes state=started
+
+  - name: redis is responding?
+    command: redis-cli PING
+
+  - name: specify node source repo
+    sudo: yes
+    script: ./scripts/set-node-source-repo.sh
