@@ -22,4 +22,4 @@
 
   - name: specify node source repo
     sudo: yes
-    script: ./scripts/set-node-source-repo.sh
+    script: ./files/set-node-source-repo.sh
