@@ -1,12 +1,13 @@
 ---
-# A list of tasty fruits
+# this playbook builds a hubot server over node.js
 - hosts: default
   tasks:
   - name: apt update for cache
     sudo: yes
     apt: name=redis-server
       state=present
-#      update-cache=yes
+      update-cache=yes
+      cache_valid_time=3600
 
   - name: tweak the redis config file
     sudo: yes
