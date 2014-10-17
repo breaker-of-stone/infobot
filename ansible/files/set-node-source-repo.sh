@@ -53,7 +53,7 @@ fi
 
 if [ "X${PRE_INSTALL_PKGS}" != "X" ]; then
     print_status "Installing packages required for setup:${PRE_INSTALL_PKGS}..."
-    exec_cmd 'apt-get update'
+    # exec_cmd 'apt-get update'
     # This next command needs to be redirected to /dev/null or the script will bork
     # in some environments
     exec_cmd "apt-get install -y${PRE_INSTALL_PKGS} 2>&1 > /dev/null"

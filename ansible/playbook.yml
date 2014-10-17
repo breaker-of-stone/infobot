@@ -2,12 +2,14 @@
 # this playbook builds a hubot server over node.js
 - hosts: default
   tasks:
-  - name: apt update for cache
+  - name: update apt's cache
+    sudo: yes
+    apt: update-cache=yes cache_valid_time=3600
+
+  - name: fetch and install redis
     sudo: yes
     apt: name=redis-server
       state=present
-      update-cache=yes
-      cache_valid_time=3600
 
   - name: tweak the redis config file
     sudo: yes
@@ -23,3 +25,12 @@
   - name: specify node source repo
     sudo: yes
     script: ./files/set-node-source-repo.sh
+
+  - name: fetch and install node
+    sudo: yes
+    apt: name=nodejs
+      state=present
+
+  - name: node is responding?
+    command: node -v
+

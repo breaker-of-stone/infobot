@@ -7,12 +7,12 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "ubuntu/trusty64"
 
-  config.vm.network "private_network", ip: "192.168.2.2"
+#  config.vm.network "private_network", ip: "192.168.2.2"
 
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "ansible/playbook.yml"
     ansible.inventory_path = "./ansible/ansible_inventory"
-    ansible.verbose = 'v'
+    ansible.verbose = 'vv'
   end
 
   # Disable automatic box update checking. If you disable this, then
@@ -33,6 +33,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Bridged networks make the machine appear as another physical device on
   # your network.
   # config.vm.network "public_network"
+  config.vm.network "public_network", bridge: 'en0: Wi-Fi (AirPort)', ip: "10.1.1.100"
 
   # If true, then any SSH connections made will enable agent forwarding.
   # Default value: false
