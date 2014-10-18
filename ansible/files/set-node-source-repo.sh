@@ -121,8 +121,8 @@ print_status 'Creating apt sources list file for the NodeSource repo...'
 exec_cmd "echo 'deb https://deb.nodesource.com/node ${DISTRO} main' > /etc/apt/sources.list.d/nodesource.list"
 exec_cmd "echo 'deb-src https://deb.nodesource.com/node ${DISTRO} main' >> /etc/apt/sources.list.d/nodesource.list"
 
-print_status 'Running `apt-get update` for you...'
+# print_status 'Running `apt-get update` for you...'
 
-exec_cmd 'apt-get update'
+# exec_cmd 'apt-get update'
 
 print_status 'Run `apt-get install nodejs` (as root) to install Node.js and npm'

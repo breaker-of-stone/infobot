@@ -34,3 +34,15 @@
   - name: node is responding?
     command: node -v
 
+#  - name: allow vagrant to install node modules
+# sudo chown -R $USER /usr/lib/node_modules
+#    acl: name=/usr/lib/node_modules entity=vagrant etype=user permissions=rw default=yes state=present
+
+  - name: fetch and install hubot
+    sudo: yes
+    npm: name=hubot global=yes
+
+  - name: fetch and install coffeescript
+    sudo: yes
+    npm: name=coffee-script global=yes
+
