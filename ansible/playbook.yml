@@ -22,9 +22,9 @@
   - name: redis is responding?
     command: redis-cli PING
 
-  - name: specify node source repo
+  - name: specify node source repo (slow one)
     sudo: yes
-    script: ./files/set-node-source-repo.sh
+    script: ./files/node_source_repo.sh creates=/etc/apt/sources.list.d/nodesource.list
 
   - name: fetch and install node
     sudo: yes
@@ -32,17 +32,34 @@
       state=present
 
   - name: node is responding?
-    command: node -v
-
-#  - name: allow vagrant to install node modules
-# sudo chown -R $USER /usr/lib/node_modules
-#    acl: name=/usr/lib/node_modules entity=vagrant etype=user permissions=rw default=yes state=present
-
-  - name: fetch and install hubot
-    sudo: yes
-    npm: name=hubot global=yes
+    command: nodejs -v
 
   - name: fetch and install coffeescript
     sudo: yes
     npm: name=coffee-script global=yes
 
+  - name: fetch and install hubot
+    sudo: yes
+    npm: name=hubot global=yes
+
+  - name: fetch and install yeoman
+    sudo: yes
+    npm: name=yo global=yes
+
+  - name: fetch and install hubot generator
+    sudo: yes
+    npm: name=generator-hubot global=yes
+
+  - name: fetch and install tedious
+    sudo: yes
+    npm: name=tedious global=yes
+
+  - name: make a folder for a hubot instance
+    sudo: yes
+    file: path=/home/vagrant/infobot owner=vagrant group=vagrant mode=0775 state=directory
+
+  - name: yeoman up a hubot (as infobot)
+    command: yo hubot --defaults --name infobot 
+    args:
+      chdir: /home/vagrant/infobot
+      creates: /home/vagrant/infobot/package.json

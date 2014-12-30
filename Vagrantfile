@@ -11,7 +11,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "ansible/playbook.yml"
-    ansible.inventory_path = "./ansible/ansible_inventory"
+    ansible.inventory_path = "./ansible/inventory/enumerate_vagrant_hosts.py"
     ansible.verbose = 'vv'
   end
 
@@ -33,7 +33,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Bridged networks make the machine appear as another physical device on
   # your network.
   # config.vm.network "public_network"
-  config.vm.network "public_network", bridge: 'en0: Wi-Fi (AirPort)', ip: "10.1.1.100"
+#  config.vm.network "public_network", bridge: 'en0: Wi-Fi (AirPort)', ip: "10.1.1.100"
+#  config.vm.network "public_network", bridge: 'en0: Wi-Fi (AirPort)', ip: "192.168.200.144"
+  config.vm.network "public_network", bridge: 'en0: Wi-Fi (AirPort)'
 
   # If true, then any SSH connections made will enable agent forwarding.
   # Default value: false

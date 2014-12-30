@@ -12,7 +12,7 @@
 # wget -qO- https://deb.nodesource.com/setup | bash -
 #
 
-export DEBIAN_FRONTEND=noninteractive 
+export DEBIAN_FRONTEND=noninteractive
 
 print_status() {
     echo
@@ -51,9 +51,12 @@ if [ ! -x /usr/bin/curl ] && [ ! -x /usr/bin/wget ]; then
     PRE_INSTALL_PKGS="${PRE_INSTALL_PKGS} curl"
 fi
 
+# Populating Cache
+print_status "Populating apt-get cache..."
+exec_cmd 'apt-get update'
+
 if [ "X${PRE_INSTALL_PKGS}" != "X" ]; then
     print_status "Installing packages required for setup:${PRE_INSTALL_PKGS}..."
-    # exec_cmd 'apt-get update'
     # This next command needs to be redirected to /dev/null or the script will bork
     # in some environments
     exec_cmd "apt-get install -y${PRE_INSTALL_PKGS} 2>&1 > /dev/null"
@@ -70,6 +73,7 @@ check_alt() {
     fi
 }
 
+check_alt "Linux Mint" "rebecca" "Ubuntu" "trusty"
 check_alt "Linux Mint" "qiana" "Ubuntu" "trusty"
 check_alt "Linux Mint" "maya" "Ubuntu" "precise"
 check_alt "elementaryOS" "luna" "Ubuntu" "precise"
@@ -121,8 +125,8 @@ print_status 'Creating apt sources list file for the NodeSource repo...'
 exec_cmd "echo 'deb https://deb.nodesource.com/node ${DISTRO} main' > /etc/apt/sources.list.d/nodesource.list"
 exec_cmd "echo 'deb-src https://deb.nodesource.com/node ${DISTRO} main' >> /etc/apt/sources.list.d/nodesource.list"
 
-# print_status 'Running `apt-get update` for you...'
+print_status 'Running `apt-get update` for you...'
 
-# exec_cmd 'apt-get update'
+exec_cmd 'apt-get update'
 
 print_status 'Run `apt-get install nodejs` (as root) to install Node.js and npm'
