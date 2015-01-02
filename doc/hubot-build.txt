@@ -1,7 +1,27 @@
+# If Ansible not available locally - e.g. running on Windows - make a machine and load Ansible into it.
+
+vagrant up --no-provision
+
+vagrant ssh
+
 sudo apt-get install software-properties-common
-sudo apt-add-repository ppa:ansible/ansible
+sudo apt-add-repository -y ppa:ansible/ansible   # override prompts to confirm install
 sudo apt-get update
-sudo apt-get install ansible
+sudo apt-get -y install ansible   # override prompts to confirm install
+
+sudo apt-get -y install git
+
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+git config --global push.default simple
+
+git clone https://github.com/breaker-of-stone/infobot.git
+
+ansible -i ./ansible/ansible_inventory --private-key=~/.vagrant.d/insecure_private_key -u vagrant all -m setup --tree ./ansible/facts
+
+# make a second vagrant - clone the repo again:
+
+vagrant up --no-provision
 
 # insert in vagrantfile
 

@@ -1,3 +1,33 @@
+
+
+
+--
+Alex Hutton:
+Below are the details requested in request R-49973:
+
+[1] Can I have an IP# and DNS entry allocated for the next sequential DEV hostname?
+                NOPDEVAPP46 -              10.44.1.118
+
+[2] Can I have a CNAME for the host ‘infobot’?
+                Created
+
+[3] The specs will be 2GB memory, 1 vCPU, 30GB disk and it will be created on
+the NOPDEVHOST environment. Can you confirm that the resources are available?
+
+The resources are available.  If the VM can do without SAN
+storage, then the datastore VMStorage would be the preferred
+location for the VM.  If SAN storage is a requirement then the
+datastore NOP2_LUN4_SAS is preferred.
+
+[4] I’m thinking of fetching a Ubuntu 12.04 LTS 64 bit image to seed the VM
+with, and would like to know where I could stash that temporarily so that
+VSphere can load it efficiently. Can you nominate an appropriate location?
+
+There is a folder named ISO Sources located on the VMStorage datastore that can
+be used to house the ISO temporarily.
+
+
+--
 mkdir vagrant
 mkdir vagrant/01
 mkdir vagrant/02
