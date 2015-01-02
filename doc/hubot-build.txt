@@ -38,6 +38,8 @@ cd infobot
 git init
   The program 'git' is currently not installed.
 
+git config --global push.default simple
+
 git add .
 git commit -m "Initial commit"
 
