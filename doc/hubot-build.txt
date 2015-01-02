@@ -1,0 +1,55 @@
+sudo apt-get install software-properties-common
+sudo apt-add-repository ppa:ansible/ansible
+sudo apt-get update
+sudo apt-get install ansible
+
+# insert in vagrantfile
+
+bridge: 'en0: Wi-Fi (AirPort)'
+
+new_ip=$(vagrant ssh -c "ip address show eth1 | grep 'inet ' | sed -e 's/^.*inet //' -e 's/\/.*$//'")
+echo "default ansible_ssh_host=${new_ip}" >ansible/hosts/default
+
+curl -sL https://deb.nodesource.com/setup | sudo bash -
+# capture script in ansible /files folder
+# it creates /etc/apt/sources.list.d/nodesource.list
+
+hubot --create infobot  # deprecated
+https://github.com/github/hubot/blob/master/docs/README.md
+Agrs to yeoman:
+-—owner 	Bot owner, e.g. "Bot Wrangler bw@example.com"
+--name 	Bot name, e.g. "Hubot"
+--description 	Bot description, e.g. "Delightfully aware robutt"
+--adapter 	Bot adapter, e.g. "campfire"
+--defaults 	Declare all defaults are set and no prompting required
+
+npm install -g yo generator-hubot
+    mkdir -p infobot
+    yo hubot
+
+# HUBOT_NAME environment variable respected by
+
+Location of the hubot instance: /home/vagrant/infobot # for ansible npm path variable
+
+# load coffee-script globally *before* node to avoid node’s inbuilt coffee blocking install
+
+cd infobot
+
+git init
+  The program 'git' is currently not installed.
+
+git add .
+git commit -m "Initial commit"
+
+git clone https://github.com/breaker-of-stone/infobot.git
+
+bin/hubot --name infobot
+
+bin/hubot
+
+
+https://github.com/pekim/tedious
+
+
+
+

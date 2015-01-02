@@ -1,0 +1,33 @@
+var Connection = require('../lib/tedious').Connection;
+var Request = require('../lib/tedious').Request;
+
+var config = {
+  server: '10.1.1.100',
+  userName: 'prod_readonly',
+  password: 'placeholder',
+  options: {
+    debug: {
+      packet: true,
+      data: true,
+      payload: true,
+      token: false,
+      log: true
+    },
+    database: 'prod_readonly',
+    encrypt: false
+  }
+};
+
+var connection = new Connection(config);
+
+connection.on('connect', function(err) {
+// If no error, then good to go...
+//executeStatement();
+  console.log('Connected ...');
+}
+);
+
+connection.on('debug', function(text) {
+  console.log('Failed ...');
+}
+);

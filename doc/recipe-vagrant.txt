@@ -1,0 +1,17 @@
+mkdir vagrant
+mkdir vagrant/01
+mkdir vagrant/02
+
+cd ~/vagrant/01
+vagrant init ubuntu/trusty64
+vagrant up
+
+cd ~/vagrant/02
+vagrant init ubuntu/trusty64
+vagrant up
+
+touch ~/vagrant/01/ansible/playbook.yml
+
+ansible -i ./ansible/ansible_inventory --private-key=~/.vagrant.d/insecure_private_key -u vagrant all -m setup --tree ./ansible/facts
+
+ANSIBLE_HOSTS - Override the default ansible hosts file

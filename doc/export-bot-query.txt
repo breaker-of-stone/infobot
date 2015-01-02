@@ -1,0 +1,33 @@
+
+use prod;
+go
+
+audit_trail_events.value = 85 (exported)
+
+DECLARE @dt datetime = DATEADD(minute,-10400, getdate());
+
+FROM select u.name, count(*) as howmany from audit_trail at
+left join users u on at.id_user = u.id_object
+where at.code_event = 85 -- Exports
+and at.date_event >= @dt
+group by u.name
+order by howmany DESC;
+
+select top 100 u.name, at.id_object, f.name as xfile, at.date_event, at.text_value1
+from audit_trail at left join users u on at.id_user = u.id_object, folders f
+where at.code_event = 85
+and at.text_value1 not like 'Sent offline%'
+and at.id_file = f.id_object
+order by at.date_event DESC;
+
+DECLARE @Names VARCHAR(8000);
+SELECT @Names = COALESCE(@Names + ', ', '') +
+    ISNULL(x.xfile, 'N/A')
+FROM (
+  select top 100 u.name, at.id_object, at.id_file as xfile, at.date_event, at.text_value1
+  from audit_trail at left join users u on at.id_user = u.id_object
+  where at.code_event = 85
+  and at.text_value1 not like 'Sent offline%'
+  order by at.date_event DESC
+  ) as x;
+select @Names;
