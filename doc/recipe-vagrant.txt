@@ -1,4 +1,15 @@
 
+Using Vagrant-generated groups to target ansible playbooks:
+
+Add to your Vagrantfile:
+config.vm.hostname = "string"
+
+ansible.groups = {
+  "group1" => ["machine1"],
+  "group2" => ["machine2"],
+  "all_groups:children" => ["group1", "group2"]
+}
+
 
 
 --
