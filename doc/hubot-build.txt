@@ -69,9 +69,17 @@ bin/hubot --name infobot
 
 bin/hubot
 
-
 https://github.com/pekim/tedious
 
+config.vm.provider :virtualbox do |vb|
+  vb.gui = false
+  if ARGV[0] == "up"
+    if ENV["VB_GUI"] == "true" then vb.gui = true
+    else
+       puts("[info] VB_GUI environment variable not set so running headless")
+    end
+  end
+end
 
 
 
