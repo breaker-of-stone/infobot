@@ -71,6 +71,8 @@ bin/hubot
 
 https://github.com/pekim/tedious
 
+# Vagrantfile syntax is Ruby.  Handle command line args like this:
+
 config.vm.provider :virtualbox do |vb|
   vb.gui = false
   if ARGV[0] == "up"
@@ -81,5 +83,9 @@ config.vm.provider :virtualbox do |vb|
   end
 end
 
+# installing docker:
+
+$ sudo apt-get update
+$ wget -qO- https://get.docker.com/ | sh
 
 
